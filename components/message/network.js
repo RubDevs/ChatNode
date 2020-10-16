@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const controller = require('./controller')
 const response = require('../../network/response');
 
 router.get('/',(req,res)=>{
@@ -11,14 +12,13 @@ router.get('/',(req,res)=>{
 });
 
 router.post('/',(req,res)=>{
-    console.log(req.query)
-    console.log(req.body);
-    if(req.query.error == "ok"){
-        response.error(req,res,'Error simulado',401)
-    }else{
-        response.success(req,res,`Mensaje ${req.body.text} agregado correctamente`)
-    }
-    
+    controller.addMessage(req.body.user, req.body.message)
+    .then((fullmessage)=>{
+        response.success(req,res,fullmessage)
+    })
+    .catch(err=>{
+        response.error(req,res,'Informacion Invalida',400,'No hay usuario o mensaje');
+    });
 });
 
 module.exports = router;
