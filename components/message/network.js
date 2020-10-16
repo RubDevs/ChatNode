@@ -4,11 +4,13 @@ const controller = require('./controller')
 const response = require('../../network/response');
 
 router.get('/',(req,res)=>{
-    console.log(req.headers)
-    res.header({
-        "Header-Personalizado": "Informacion personalizada",
+    controller.getMessage()
+    .then((messageList)=>{
+        response.success(req,res,messageList,200)
     })
-    response.success(req,res,'Lista de mensajes')
+    .catch(e=>{
+        response.error(req, res, "Error al recuperar los mensajes", 400,"Error en la BD")
+    })
 });
 
 router.post('/',(req,res)=>{
