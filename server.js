@@ -30,6 +30,8 @@ router.post('/message',(req,res)=>{
     
 });
 
+app.use('/app', express.static('public'));
+
 // app.use('/',function(req,res){
 //     res.send('Hola');
 // });
