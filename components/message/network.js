@@ -4,7 +4,10 @@ const multer =  require('multer');
 const controller = require('./controller')
 const response = require('../../network/response');
 
-router.get('/',(req,res)=>{
+const upload = multer({
+    dest: 'public/files/',
+});
+router.get('/', (req,res)=>{
     const filteredMessages = req.query.user || null;
     controller.getMessage(filteredMessages)
     .then((messageList)=>{
@@ -15,8 +18,9 @@ router.get('/',(req,res)=>{
     })
 });
 
-router.post('/',(req,res)=>{
-    controller.addMessage(req.body.chat,req.body.user, req.body.message)
+router.post('/',upload.single('file'), (req,res)=>{
+    console.log(req.file)
+    controller.addMessage(req.body.chat,req.body.user, req.body.message,req.file)
     .then((fullmessage)=>{
         response.success(req,res,fullmessage)
     })
