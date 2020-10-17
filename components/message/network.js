@@ -23,4 +23,14 @@ router.post('/',(req,res)=>{
     });
 });
 
+router.patch('/:id',(req,res)=>{
+    controller.updateMessage(req.params.id,req.body.message)
+    .then((data)=>{
+        response.success(req,res,data,200);
+    })
+    .catch((err)=>{
+        response.error(req,res,'Error Interno',500,err)
+    });
+})
+
 module.exports = router;

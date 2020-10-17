@@ -5,9 +5,10 @@ db.Promise = global.Promise;
 db.connect('mongodb+srv://db_user_chat_node:GEtNpxWiWklkMYo3@cluster0.dljzv.gcp.mongodb.net/chat_node?retryWrites=true&w=majority',{
     useNewUrlParser: true,
     useUnifiedTopology: true,
-});
+}).then(console.log('[db] Conectada con exito'))
+.catch(err=>console.error(err));
 
-console.log('[db] Conectada con exito')
+
 function addMessage(message){
     const myMessage = new Model(message);
     myMessage.save();
@@ -18,9 +19,19 @@ async function getMessages(){
     return list;
 }
 
+async function updateMessage(id,message){
+    const foundMessage = await Model.findOne({
+        _id: id
+    });
+    foundMessage.message = message
+    const newMessage = await foundMessage.save();
+    return newMessage;
+}
+
 module.exports = {
     add: addMessage,
     list: getMessages,
+    update: updateMessage
     //get
     //update
     //delete
