@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const dotenv = require('dotenv').config();
 const response = require('./network/response')
 const router = require('./network/routes')
+const db = require('./db');
+
+db(process.env.DB_DEVELOPMENT)
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))

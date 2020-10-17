@@ -1,13 +1,4 @@
-const db = require('mongoose');
 const Model = require('./model');
-
-db.Promise = global.Promise;
-db.connect('mongodb+srv://db_user_chat_node:GEtNpxWiWklkMYo3@cluster0.dljzv.gcp.mongodb.net/chat_node?retryWrites=true&w=majority',{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(console.log('[db] Conectada con exito'))
-.catch(err=>console.error(err));
-
 
 function addMessage(message){
     const myMessage = new Model(message);
