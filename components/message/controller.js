@@ -18,9 +18,9 @@ function addMessage(user,message) {
     })
 }
 
-function getMessage() {
+function getMessage(filterUser) {
     return new Promise((resolve,reject)=>{
-        let lista = store.list();
+        let lista = store.list(filterUser);
         console.log(lista)
         resolve(lista);
     })
