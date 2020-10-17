@@ -35,8 +35,19 @@ function updateMessage(id,message) {
         resolve(result);
     })
 }
+
+function deleteMessage(id) {
+    return new Promise(async (resolve,reject)=>{
+        if(!id){
+           return reject('Invalid data');
+        }
+        const result = await store.delete(id);
+        resolve('Eliminado exitosamente');
+    });
+}
 module.exports = {
     addMessage,
     getMessage,
     updateMessage,
+    deleteMessage
 }

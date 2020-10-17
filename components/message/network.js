@@ -32,6 +32,16 @@ router.patch('/:id',(req,res)=>{
     .catch((err)=>{
         response.error(req,res,'Error Interno',500,err)
     });
-})
+});
+
+router.delete('/:id',(req, res)=>{
+    controller.deleteMessage(req.params.id)
+    .then((data)=>{
+        response.success(req,res,data,200)
+    })
+    .catch(err=>{
+        response.error(req,res,'Error',500,err)
+    })
+});
 
 module.exports = router;
