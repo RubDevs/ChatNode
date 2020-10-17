@@ -5,13 +5,22 @@ function addMessage(message){
     myMessage.save();
 }
 
-async function getMessages(user){
-    let filter = {};
-    if(user){
-        filter = { user: user};
-    }
-    const list = await Model.find(filter);
-    return list;
+function getMessages(user){
+    return new Promise((resolve,reject)=>{
+        let filter = {};
+        if(user){
+            filter = { user: user};
+        }
+        Model.find(filter)
+        .populate('user')
+        .exec((error,populated)=>{
+            if(error){
+                reject(error);
+            }
+            resolve(populated);
+        })
+    })
+    
 }
 
 async function updateMessage(id,message){
