@@ -1,12 +1,15 @@
 const express = require('express');
+const app = express();
+const server = require('http').Server(app);
+
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv').config();
-const response = require('./network/response')
 const router = require('./network/routes')
 const db = require('./db');
+const dotenv = require('dotenv').config();
+
 
 db(process.env.DB_DEVELOPMENT)
-var app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
 //enviamos el servidor al router para configurar las rutas
@@ -21,5 +24,6 @@ app.use('/app', express.static('public'));
 //     res.send('Hola');
 // });
 
-app.listen(3000)
-console.log("Escuchando en http://localhost:3000")
+server.listen(3000,()=>{
+    console.log("Escuchando en http://localhost:3000");
+});
