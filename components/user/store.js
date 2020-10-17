@@ -2,15 +2,17 @@ const Model = require('./model');
 
 function addUser(user){
     const myUser = new Model(user);
-    myUser.save();
+    return myUser.save();
 }
 
-async function getUser(user){
+async function getUser(name){
     let filter = {};
-    if(user){
-        filter = { name: user};
+    if(name){
+        filter = { name: name};
     }
+    //return await Model.find(filter);
     const list = await Model.find(filter);
+    console.log(`Lista de usuarios ${list}`)
     return list;
 }
 
