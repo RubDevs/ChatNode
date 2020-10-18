@@ -5,6 +5,7 @@ const server = require('http').Server(app);
 const bodyParser = require('body-parser');
 const router = require('./network/routes')
 const db = require('./db');
+const socket = require('./socket');
 const dotenv = require('dotenv').config();
 
 
@@ -12,6 +13,9 @@ db(process.env.DB_DEVELOPMENT)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
+
+//enviamos el servidor al socket
+socket.connect(server);
 //enviamos el servidor al router para configurar las rutas
 router(app);
 
