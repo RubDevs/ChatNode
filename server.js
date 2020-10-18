@@ -16,6 +16,14 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 //enviamos el servidor al socket
 socket.connect(server);
+
+const io = socket.socket.io;
+io.on('connection', (socket)=>{
+    console.log('Nueva conexion');
+    socket.on('chat message', (msg) => {
+        io.emit('message', msg);
+      });
+})
 //enviamos el servidor al router para configurar las rutas
 router(app);
 
