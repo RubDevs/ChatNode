@@ -32,9 +32,13 @@ In order to see it in action you must create an MongoDB Atlas account if not hav
 
 Once created get the connection string by pressing to connect button in your cluster
 ![connect](/assets/mongoatlas.png)
+
 Then choose native drivers option
+
 ![drivers](/assets/mongoatlas0.png)
+
 Finally copy the connection string given and replace the parameters <password> and <DBname>
+  
 ![string](/assets/mongoatlas1.png)
 
 Now add to ChatNode root a file called .env with following content:
