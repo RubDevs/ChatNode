@@ -21,22 +21,22 @@ Simple Node js chat application and API.
 Requires [Node.js](https://nodejs.org/) to run.
 
 Clone the repo 
-Install the dependencies.
+Install dependencies.
 
 ```sh
 $ git clone https://github.com/RubDevs/ChatNode.git
 $ cd ChatNode
 $ npm install 
 ```
-In order to see it in action you must create an MongoDB Atlas account if not have one already (free tier works fine) and create a DB cluster, follow every step given by Mongo Atlas to achieve it.
+In order to see it in action you must create a MongoDB Atlas account if not have one already (free tier works fine) and create a DB cluster, follow every step given by Mongo Atlas to achieve it.
 
-Once created get the connection string by pressing to connect button in your cluster  
+Once created, get the connection string by pressing to connect button in your cluster  
 ![connect](/assets/mongoatlas.png)  
 
 Then choose native drivers option  
 ![drivers](/assets/mongoatlas0.png)  
 
-Finally copy the connection string given and replace the parameters <password> and <DBname>  
+Finally copy the connection string given and replace the parameters password and DBname  
 ![string](/assets/mongoatlas1.png)  
 
 Now add to ChatNode root a file called .env with following content:
@@ -51,7 +51,7 @@ $ node server
 ### Docker
 Chat Node is very easy to install and deploy in a Docker container.
 
-By default, the Docker will expose port 3000. When ready, simply use the Dockerfile to build the image.
+By default, Docker will expose port 3000(configured in Dockerfile). When ready, simply use the Dockerfile to build the image.
 
 ```sh
 cd ChatNode
@@ -59,7 +59,7 @@ docker build -t <yourDockerHubUser>/chat_node:1.1 .
 ```
 This will create the ChatNode image and pull in the necessary dependencies.
 
-Once done, run the Docker image and map the port to whatever you wish on your host.(if want to test WebSocket chosse 3000 also, if only want to try API choose on your preference) In this example, we simply map port 3000 of the host to port 3000 of the Docker:
+Once done, run the Docker image and map the port to whatever you wish on your host.(if you want to test WebSocket choose 3000 also, if only want to try API choose on your preference) In this example, we simply map port 3000 of the host to port 3000 of the Docker container:
 
 ```sh
 docker run -d -p 3000:3000  <yourDockerHubuser>/chat_node:1.1
@@ -83,7 +83,7 @@ with the following body
     "name": "Dominic"
 }
 ```
-Will create a user named Dominic in the DB. The response contains the user id generated, you can used to modify or delete the user.
+Will create a user named Dominic in the DB. The response contains the user id generated, you can use it to modify or delete the user.
 
 A GET to the same address will return every user in DB.
 
